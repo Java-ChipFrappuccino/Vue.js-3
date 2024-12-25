@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import './style.css';
 import App from './App.vue';
+import store from './store/store.js';
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -18,4 +19,7 @@ import {
 /* 라이브러리에 아이콘 등록 */
 library.add(faBarsStaggered, faLocationDot, faMagnifyingGlass);
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app');
+createApp(App)
+  .use(store)
+  .component('font-awesome-icon', FontAwesomeIcon)
+  .mount('#app');

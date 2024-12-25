@@ -7,7 +7,12 @@
           type="search"
           placeholder="지역을 입력해 주세요"
         />
-        <button @click="$emit('onSearchCity', inputText)">
+        <button
+          @click="
+            $store.commit('onSearchCity', inputText);
+            $store.dispatch('getWeather');
+          "
+        >
           <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
         </button>
       </div>
@@ -16,42 +21,42 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+import { ref } from 'vue';
 
-  const inputText = ref('');
-  const emits = defineEmits(['onSearchCity']); // 보낼 이벤트들을 모아두는곳
+const inputText = ref('');
+// const emits = defineEmits(['onSearchCity']); // 보낼 이벤트들을 모아두는곳
 </script>
 
 <style lang="scss" scoped>
-  .search-bar {
-    padding: 8px 20px;
-    border-radius: 40px;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 0 20px;
+.search-bar {
+  padding: 8px 20px;
+  border-radius: 40px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 0 20px;
 
-    form {
-      .form-group {
-        display: flex;
-        input {
-          width: 100%;
-          border: none;
-          padding: 1em 0;
-          font-size: 18px;
-          outline: none;
-          font-size: 14px;
+  form {
+    .form-group {
+      display: flex;
+      input {
+        width: 100%;
+        border: none;
+        padding: 1em 0;
+        font-size: 18px;
+        outline: none;
+        font-size: 14px;
+      }
+      button {
+        background: transparent;
+        border: none;
+        &:hover {
+          cursor: pointer;
         }
-        button {
-          background: transparent;
-          border: none;
-          &:hover {
-            cursor: pointer;
-          }
-          .icon {
-            font-size: 24px;
-          }
+        .icon {
+          font-size: 24px;
         }
       }
     }
   }
+}
 </style>
